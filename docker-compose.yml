@@ -5,33 +5,26 @@ services:
     container_name: snapgo
     build: .
     ports:
-      - 8080:8080
+      - 3000:3000
     restart: on-failure
     volumes:
       - .:/app
     depends_on:
-      - postgres
+      - mongo
     networks:
       - fullstack
 
-  postgres:
-    image: postgres:latest
-    container_name: snapgo_db
-    environment:
-      - POSTGRES_USER=${DB_USER}  
-      - POSTGRES_PASSWORD=${DB_PASS}
-      - POSTGRES_DB=${DB_NAME}
-      - DATABASE_HOST=${DB_HOST}
-    ports:
-      - '5432:5432'
+
+  mongo:
+    image: mongo
+    container_name: mongo
     volumes:
-      - database_postgres:/var/lib/postgresql/data
-    networks:
-      - fullstack
+      - ./data:/data
+    ports:
+      - 27017:27017
 
 volumes:
   app:
-  database_postgres:
 
 networks:
   fullstack:
