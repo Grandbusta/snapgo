@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/Grandbusta/snapgo/config"
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -19,6 +20,10 @@ func NewServer() *Server {
 }
 
 func (s *Server) Run() {
+	port := config.GetEnvs().PORT
 	s.InitializeApp()
-	s.router.Run(":3000")
+	err := s.router.Run(port)
+	if err != nil {
+		logrus.Fatal(err)
+	}
 }
