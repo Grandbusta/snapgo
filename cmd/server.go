@@ -1,10 +1,20 @@
 package cmd
 
-import "fmt"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 type Server struct {
+	router *gin.Engine
 }
 
-func Run() {
-	fmt.Println("running")
+func NewServer() *Server {
+	return &Server{
+		router: gin.New(),
+	}
+}
+
+func (s *Server) Run() {
+	InitializeApp()
+	s.router.Run(":8080")
 }
