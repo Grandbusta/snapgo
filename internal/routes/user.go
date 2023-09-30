@@ -9,7 +9,10 @@ import (
 
 func UserRoutes(g *gin.Engine, m *mongo.Client) {
 	u := g.Group("/")
-	user := actions.NewUserAction(*repository.NewUserRepository(), m)
+	user := actions.NewUserAction(
+		repository.NewUserRepository(),
+		m,
+	)
 
 	u.GET("/signup", user.CreateUser)
 }

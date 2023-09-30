@@ -12,11 +12,11 @@ type UserAction struct {
 }
 
 func NewUserAction(
-	UserRepository repository.UserRepository,
+	UserRepository *repository.UserRepository,
 	db *mongo.Client,
 ) *UserAction {
 	return &UserAction{
-		UserRepository: UserRepository,
+		UserRepository: *UserRepository,
 		db:             db,
 	}
 }
