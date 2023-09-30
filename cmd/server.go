@@ -15,6 +15,6 @@ func NewServer() *Server {
 }
 
 func (s *Server) Run() {
-	InitializeApp()
+	s.InitializeApp()
 	s.router.Run(":8080")
 }

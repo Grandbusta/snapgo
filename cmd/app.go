@@ -1,11 +1,16 @@
 package cmd
 
-import "fmt"
+import (
+	"fmt"
 
-func registerRoutes() {
+	"github.com/Grandbusta/snapgo/internal/routes"
+)
 
+func (s *Server) registerRoutes() {
+	routes.UserRoutes(s.router)
 }
 
-func InitializeApp() {
+func (s *Server) InitializeApp() {
+	s.registerRoutes()
 	fmt.Println("App initialized")
 }
