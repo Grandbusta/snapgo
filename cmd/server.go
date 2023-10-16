@@ -1,8 +1,12 @@
 package cmd
 
 import (
+	"log"
+
 	"github.com/Grandbusta/snapgo/config"
+	"github.com/Grandbusta/snapgo/routes"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -10,6 +14,13 @@ import (
 type Server struct {
 	router *gin.Engine
 	db     *mongo.Client
+}
+
+func init() {
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found")
+	}
+	config.NewLogger()
 }
 
 func NewServer() *Server {
@@ -21,7 +32,7 @@ func NewServer() *Server {
 
 func (s *Server) Run() {
 	port := config.GetEnvs().PORT
-	s.InitializeApp()
+	routes.Routes(s.router, s.db)
 	err := s.router.Run(port)
 	if err != nil {
 		logrus.Fatal(err)
