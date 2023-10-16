@@ -2,10 +2,6 @@ package repository
 
 import "github.com/Grandbusta/snapgo/internal/domain/entity"
 
-type IUserRepository interface {
-	CreateUser(*entity.User) (*entity.User, error)
-}
-
 type UserRepository struct {
 }
 
