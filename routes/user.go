@@ -6,7 +6,9 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func Routes(g *gin.Engine, m *mongo.Client) {
+func Routes(g *gin.Engine, db *mongo.Client) {
 	u := g.Group("/user")
-	u.GET("/signup", controllers.CreateUser)
+	userController := controllers.UserController{DB: db}
+
+	u.GET("/signup", userController.CreateUser)
 }

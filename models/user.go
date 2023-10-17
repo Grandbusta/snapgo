@@ -12,7 +12,6 @@ type User struct {
 	Password  string             `json:"password"`
 	Username  string             `json:"username"`
 	CreatedAt time.Time          `bson:"createdAt" json:"createdAt"`
-	UpdatedAt time.Time          `bson:"updatedAt" json:"updatedAt"`
 }
 
 type UserInput struct {
@@ -25,4 +24,8 @@ type PublicUser struct {
 	ID       primitive.ObjectID `json:"id"`
 	Email    string             `json:"email"`
 	Username string             `json:"username"`
+}
+
+func (u *User) SaveUser() {
+
 }
